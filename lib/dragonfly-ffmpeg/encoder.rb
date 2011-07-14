@@ -29,7 +29,7 @@ module EnMasse
         
         configurable_attr :encoder_profiles, {
           :mp4 => [
-            Profile.new(:default,
+            Profile.new(:html5,
               :video_codec => "libx264",
               :resolution => "1280x720",
               :frame_rate => 29.97,
@@ -41,7 +41,7 @@ module EnMasse
             )
           ],
           :ogv => [
-            Profile.new(:default,
+            Profile.new(:html5,
               :video_codec => "libtheora",
               :resolution => "1280x720",
               :frame_rate => 29.97,
@@ -52,7 +52,7 @@ module EnMasse
             )
           ],
           :webm => [
-            Profile.new(:default,
+            Profile.new(:html5,
               :video_codec => "libvpx",
               :resolution => "1280x720",
               :frame_rate => 29.97,
@@ -67,24 +67,30 @@ module EnMasse
         
         configurable_attr :output_directory, '/tmp'
         
-        def encode(temp_object, format, profile_id = :default, options = {})
-          if profile_id.is_a?(Profile)
-            profile = profile_id
-          else
-            raise UnknownEncoderProfile unless profile_defined?(format, profile_id.to_sym)
-            profile = get_profile(format, profile_id.to_sym)
+        def encode(temp_object, format, profile = :html5, options = {})
+          format = format.to_sym
+          raise UnsupportedFormat, "Format not supported - #{format}" unless supported_format?(format)
+          unless profile.is_a?(Profile)
+            raise UnknownEncoderProfile unless profile_defined?(format, profile.to_sym)
+            profile = get_profile(format, profile.to_sym)
           end
           
           options.merge!(profile.encoding_options)
           
           origin = ::FFMPEG::Movie.new(temp_object.path)
-          new_filename = ::Pathname.new(temp_object.path).sub_ext(".#{format}").basename
-          new_filepath = File.join(output_directory, new_filename)
-          transcoded = origin.transcode(new_filepath, options)
-          ::Dragonfly::TempObject.new(File.read(transcoded.path))
+          tempfile = new_tempfile(format)
+          transcoded = origin.transcode(tempfile.path, options)
+          ::Dragonfly::TempObject.new(File.new(transcoded.path))
         end
-        
+                
         private
+        
+        def new_tempfile(ext = nil)
+          tempfile = ext ? Tempfile.new(["dragonfy-video", ".#{ext}"]) : Tempfile.new("dragonfly-video")
+          tempfile.binmode
+          tempfile.close
+          tempfile
+        end
         
         def profiles(format)
           encoder_profiles[format]
@@ -93,6 +99,10 @@ module EnMasse
         def get_profile(format, profile_name)
           result = profiles(format).select { |profile| profile.name == profile_name }
           result.first
+        end
+        
+        def supported_format?(format)
+          encoder_profiles.has_key?(format)
         end
         
         def profile_defined?(format, profile_name)

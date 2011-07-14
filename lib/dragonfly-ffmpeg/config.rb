@@ -28,6 +28,11 @@ module EnMasse
               e.output_directory = opts[:output_directory] if opts.has_key?(:output_directory)
               e.encoder_profiles = opts[:encoder_profiles] if opts.has_key?(:encoder_profiles)
             end
+            
+            c.job :html5 do |format, options|
+              options = options || {}
+              encode(format, :html5, options)
+            end
           end
         end
         

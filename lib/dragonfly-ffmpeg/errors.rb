@@ -25,6 +25,9 @@ module EnMasse
       class EncoderError < DragonflyFFMPEGError
       end
       
+      class UnsupportedFormat < EncoderError
+      end
+      
       class UnknownEncoderProfile < EncoderError
       end
     end
