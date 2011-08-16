@@ -79,14 +79,14 @@ module EnMasse
           
           origin = ::FFMPEG::Movie.new(temp_object.path)
           tempfile = new_tempfile(format)
-          transcoded = origin.transcode(tempfile.path, options)
-          ::Dragonfly::TempObject.new(File.new(transcoded.path))
+          origin.transcode(tempfile.path, options)
+          [tempfile, :format => format, :ext => format.to_s]
         end
                 
         private
         
         def new_tempfile(ext = nil)
-          tempfile = ext ? Tempfile.new(["dragonfy-video", ".#{ext}"]) : Tempfile.new("dragonfly-video")
+          tempfile = ext ? Tempfile.new(["dragonfly-ffmpeg", ".#{ext}"]) : Tempfile.new("dragonfly-ffmpeg")
           tempfile.binmode
           tempfile.close
           tempfile
