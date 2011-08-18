@@ -5,5 +5,4 @@ Gemfile.lock
 pkg/*
 .rvmrc
 spec/spec.log
-.rspec
 spec/tmp/*
