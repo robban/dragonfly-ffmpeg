@@ -57,9 +57,15 @@ describe EnMasse::Dragonfly::FFMPEG::Encoder do
     video.should have_video_codec(:libvpx)
   end
   
+  it "should throw UnsupportedFormat if the format specified is not defined" do
+    lambda {
+      @encoder.encode(@video, :lol264, :html5)
+    }.should raise_error(EnMasse::Dragonfly::FFMPEG::UnsupportedFormat)
+  end
+  
   it "should throw UnknownEncoderProfile if the encoding profile is not defined" do
     lambda {
-      @encoder.encode(@video, :lol264, :h264_720p)
+      @encoder.encode(@video, :webm, :a_fake_profile)
     }.should raise_error(EnMasse::Dragonfly::FFMPEG::UnknownEncoderProfile)
   end
 
