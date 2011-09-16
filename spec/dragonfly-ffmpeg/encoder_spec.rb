@@ -29,7 +29,7 @@ describe EnMasse::Dragonfly::FFMPEG::Encoder do
   let(:raw_video) { Dragonfly::TempObject.new(File.new(SAMPLES_DIR + '/test-movie.mov')) }
   
   describe "encode with default mp4 profile" do
-    let(:video) { subject.encode(raw_video, :mp4) }
+    let(:video) { subject.encode(raw_video, :mp4).first }
     
     it "should have the h264 video codec" do
       video.should have_video_codec(:h264)
@@ -41,7 +41,7 @@ describe EnMasse::Dragonfly::FFMPEG::Encoder do
   end
   
   describe "encode with default mp4 profile" do
-    let(:video) { subject.encode(raw_video, :ogv) }
+    let(:video) { subject.encode(raw_video, :ogv).first }
 
     it "should have the theora video codec" do
       video.should have_video_codec(:theora)
@@ -53,7 +53,7 @@ describe EnMasse::Dragonfly::FFMPEG::Encoder do
   end
   
   describe "encode with default webm profile" do
-    let(:video) { subject.encode(raw_video, :webm) }
+    let(:video) { subject.encode(raw_video, :webm).first }
     
     it "should have the libvpx video codec" do
       video.should have_video_codec(:libvpx)
@@ -78,7 +78,7 @@ describe EnMasse::Dragonfly::FFMPEG::Encoder do
       )
     end
     
-    let(:video) { subject.encode(raw_video, :webm, profile) }
+    let(:video) { subject.encode(raw_video, :webm, profile).first }
     
     it "should have the specified video codec" do
       video.should have_video_codec(profile.encoding_options[:video_codec])
