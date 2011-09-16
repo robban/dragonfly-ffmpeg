@@ -20,52 +20,104 @@ require 'spec_helper'
 
 describe EnMasse::Dragonfly::FFMPEG::Encoder do
   
-  before(:all) do
-    video_path = SAMPLES_DIR + '/test-movie.mov'
-    @video = Dragonfly::TempObject.new(File.new(video_path))
-    @encoder = EnMasse::Dragonfly::FFMPEG::Encoder.new
-    @encoder.output_directory = TMP_DIR
+  subject do
+    encoder = EnMasse::Dragonfly::FFMPEG::Encoder.new
+    encoder.output_directory = TMP_DIR
+    encoder
   end
   
-  it "should encode the video using the default mp4 encoding profile" do
-    video = @encoder.encode(@video, :mp4)
-    video.should have_video_codec(:h264)
+  let(:raw_video) { Dragonfly::TempObject.new(File.new(SAMPLES_DIR + '/test-movie.mov')) }
+  
+  describe "encode with default mp4 profile" do
+    let(:video) { subject.encode(raw_video, :mp4) }
+    
+    it "should have the h264 video codec" do
+      video.should have_video_codec(:h264)
+    end
+    
+    it "should have a mp4 file extension" do
+      video.should have_file_extension('.mp4')
+    end
   end
   
-  it "should encode the video using the default ogv encoding profile" do
-    video = @encoder.encode(@video, :ogv)
-    video.should have_video_codec(:theora)
+  describe "encode with default mp4 profile" do
+    let(:video) { subject.encode(raw_video, :ogv) }
+
+    it "should have the theora video codec" do
+      video.should have_video_codec(:theora)
+    end
+    
+    it "should have the ogv file extension" do
+      video.should have_file_extension('.ogv')
+    end
   end
   
-  it "should encode the video using the default webm encoding profile" do
-    video = @encoder.encode(@video, :webm)
-    video.should have_video_codec(:libvpx)
+  describe "encode with default webm profile" do
+    let(:video) { subject.encode(raw_video, :webm) }
+    
+    it "should have the libvpx video codec" do
+      video.should have_video_codec(:libvpx)
+    end
+    
+    it "should have the webm file extension" do
+      video.should have_file_extension('.webm')
+    end
   end
   
-  it "should encode the video using an encoding profile that is defined inline" do
-    profile = EnMasse::Dragonfly::FFMPEG::Encoder::Profile.new(:webm_720p,
-      :video_codec => "libvpx",
-      :resolution => "1280x720",
-      :frame_rate => 29.97,
-      :video_bitrate => 3072,
-      :audio_codec => "libvorbis",
-      :audio_channels => 2,
-      :audio_sample_rate => 48000,
-      :custom => "-f webm"
-    )
-    video = @encoder.encode(@video, :webm, profile)
-    video.should have_video_codec(:libvpx)
+  describe "encode with an inline defined encoding profile" do
+    let(:profile) do
+      EnMasse::Dragonfly::FFMPEG::Encoder::Profile.new(:webm_720p,
+        :video_codec => "libvpx",
+        :resolution => "1280x720",
+        :frame_rate => 29.97,
+        :video_bitrate => 3072,
+        :audio_codec => "libvorbis",
+        :audio_channels => 2,
+        :audio_sample_rate => 48000,
+        :custom => "-f webm"
+      )
+    end
+    
+    let(:video) { subject.encode(raw_video, :webm, profile) }
+    
+    it "should have the specified video codec" do
+      video.should have_video_codec(profile.encoding_options[:video_codec])
+    end
+    
+    it "should have the specified resolution" do
+      video.should have_resolution(profile.encoding_options[:resolution])
+    end
+    
+    it "should have the specified frame rate" do
+      video.should have_frame_rate(profile.encoding_options[:frame_rate])
+    end
+    
+    it "should have the specified bitrate" do
+      video.should have_bitrate(profile.encoding_options[:video_bitrate])
+    end
+    
+    it "should have the specified audio codec" do
+      video.should have_audio_codec(profile.encoding_options[:audio_codec])
+    end
+    
+    it "should have the specified number of audio channels" do
+      video.should have_audio_channels(profile.encoding_options[:audio_channels])
+    end
+    
+    it "should have the specified audio sample rate" do
+      video.should have_audio_sample_rate(profile.encoding_options[:audio_sample_rate])
+    end
   end
   
   it "should throw UnsupportedFormat if the format specified is not defined" do
     lambda {
-      @encoder.encode(@video, :lol264, :html5)
+      subject.encode(raw_video, :lol264, :html5)
     }.should raise_error(EnMasse::Dragonfly::FFMPEG::UnsupportedFormat)
   end
   
   it "should throw UnknownEncoderProfile if the encoding profile is not defined" do
     lambda {
-      @encoder.encode(@video, :webm, :a_fake_profile)
+      subject.encode(raw_video, :webm, :a_fake_profile)
     }.should raise_error(EnMasse::Dragonfly::FFMPEG::UnknownEncoderProfile)
   end
 

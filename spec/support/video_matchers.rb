@@ -22,3 +22,52 @@ RSpec::Matchers.define :have_video_codec do |v_codec|
     analyser.video_codec(given) == v_codec.to_s
   end
 end
+
+RSpec::Matchers.define :have_resolution do |resolution|
+  match do |given|
+    analyser = EnMasse::Dragonfly::FFMPEG::Analyser.new
+    analyser.resolution(given) == resolution.to_s
+  end
+end
+
+RSpec::Matchers.define :have_frame_rate do |frame_rate|
+  match do |given|
+    analyser = EnMasse::Dragonfly::FFMPEG::Analyser.new
+    analyser.frame_rate(given) == frame_rate.to_s
+  end
+end
+
+RSpec::Matchers.define :have_bitrate do |bitrate|
+  match do |given|
+    analyser = EnMasse::Dragonfly::FFMPEG::Analyser.new
+    analyser.bitrate(given) == bitrate.to_s
+  end
+end
+
+RSpec::Matchers.define :have_audio_codec do |audio_codec|
+  match do |given|
+    analyser = EnMasse::Dragonfly::FFMPEG::Analyser.new
+    analyser.audio_codec(given) == audio_codec.to_s
+  end
+end
+
+RSpec::Matchers.define :have_audio_channels do |audio_channels|
+  match do |given|
+    analyser = EnMasse::Dragonfly::FFMPEG::Analyser.new
+    analyser.audio_channels(given) == audio_channels.to_s
+  end
+end
+
+RSpec::Matchers.define :have_audio_sample_rate do |audio_sample_rate|
+  match do |given|
+    analyser = EnMasse::Dragonfly::FFMPEG::Analyser.new
+    analyser.audio_sample_rate(given) == audio_sample_rate.to_s
+  end
+end
+
+RSpec::Matchers.define :have_file_extension do |file_extension|
+  match do |given|
+    File.extname(given.path) == file_extension
+  end
+end
+
