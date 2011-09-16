@@ -16,17 +16,18 @@
 # limitations under the License.
 #
 
+require 'dragonfly'
+require 'dragonfly-ffmpeg/errors'
+require 'streamio-ffmpeg'
+
 module EnMasse
   module Dragonfly
-    module FFMPEG
+    module FFMPEG      
+      autoload :Config, 'dragonfly-ffmpeg/config'
+      autoload :Analyser, 'dragonfly-ffmpeg/analyser'
+      autoload :Encoder, 'dragonfly-ffmpeg/encoder'
     end
   end
 end
-
-require 'dragonfly'
-require 'dragonfly-ffmpeg/errors'
-require 'dragonfly-ffmpeg/config'
-require 'dragonfly-ffmpeg/analyser'
-require 'dragonfly-ffmpeg/encoder'
 
 Dragonfly::App.register_configuration(:ffmpeg) { EnMasse::Dragonfly::FFMPEG::Config }

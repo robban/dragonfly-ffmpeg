@@ -16,14 +16,13 @@
 # limitations under the License.
 #
 
-require 'streamio-ffmpeg'
 require 'pathname'
-require 'dragonfly-ffmpeg/encoder/profile'
 
 module EnMasse
   module Dragonfly
     module FFMPEG
       class Encoder
+        autoload :Profile, 'dragonfly-ffmpeg/encoder/profile'
         
         include ::Dragonfly::Configurable
         
