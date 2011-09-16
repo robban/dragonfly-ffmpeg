@@ -24,6 +24,14 @@ module EnMasse
       class Analyser
         
         include ::Dragonfly::Loggable
+        
+        def name(temp_object)
+          File.basename(temp_object.path)
+        end
+        
+        def ext(temp_object)
+          File.extname(temp_object.path)
+        end
       
         def frame_rate(temp_object)
           inspect(:frame_rate, temp_object)
