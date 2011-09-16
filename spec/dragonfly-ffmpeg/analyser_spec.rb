@@ -27,10 +27,6 @@ describe EnMasse::Dragonfly::FFMPEG::Analyser do
     @analyser.log = Logger.new(LOG_FILE)
   end
   
-  it "should return the name of the file" do
-    @analyser.name(@video).should == 'test-movie.mov'
-  end
-  
   it "should return the extension of the file" do
     @analyser.ext(@video).should == '.mov'
   end
