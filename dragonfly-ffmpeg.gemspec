@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
   
   s.add_dependency 'dragonfly', '~> 0.9'
   s.add_dependency 'streamio-ffmpeg', '~> 0.8.0'
+  s.add_dependency 'rake', '~> 0.9.2'
 
   s.add_development_dependency 'rspec', '~> 2.6.0'
   s.add_development_dependency 'guard-rspec', '~> 0.4.2'

@@ -80,13 +80,15 @@ module EnMasse
           origin = ::FFMPEG::Movie.new(temp_object.path)
           tempfile = new_tempfile(format, File.basename(temp_object.path, '.*'))
           transcoded_file = origin.transcode(tempfile.path, options)
-                    
-          [ 
-            ::Dragonfly::TempObject.new(File.new(transcoded_file.path)),
-            :name => File.basename(transcoded_file.path),
-            :format => format,
-            :ext => File.extname(transcoded_file.path)
-          ]
+          
+          content = ::Dragonfly::TempObject.new(File.new(transcoded_file.path))
+          meta = {
+              :name => File.basename(transcoded_file.path),
+              :format => format,
+              :ext => File.extname(transcoded_file.path)
+          }
+          
+          [ content, meta ]
         end
                 
         private

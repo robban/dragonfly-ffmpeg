@@ -4,5 +4,6 @@
 Gemfile.lock
 pkg/*
 .rvmrc
+.rbenv-version
 spec/spec.log
 spec/tmp/*
