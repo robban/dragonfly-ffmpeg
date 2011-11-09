@@ -68,6 +68,7 @@ module EnMasse
         
         def encode(temp_object, format, profile = :html5, options = {})
           format = format.to_sym
+          original_filename = File.basename(temp_object.path, '.*')
           
           raise UnsupportedFormat, "Format not supported - #{format}" unless supported_format?(format)
           unless profile.is_a?(Profile)
@@ -78,12 +79,12 @@ module EnMasse
           options.merge!(profile.encoding_options)
           
           origin = ::FFMPEG::Movie.new(temp_object.path)
-          tempfile = new_tempfile(format, File.basename(temp_object.path, '.*'))
+          tempfile = new_tempfile(format, original_filename)
           transcoded_file = origin.transcode(tempfile.path, options)
           
           content = ::Dragonfly::TempObject.new(File.new(transcoded_file.path))
           meta = {
-              :name => File.basename(transcoded_file.path),
+              :name => original_filename,
               :format => format,
               :ext => File.extname(transcoded_file.path)
           }
