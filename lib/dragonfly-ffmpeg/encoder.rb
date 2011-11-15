@@ -66,9 +66,16 @@ module EnMasse
         
         configurable_attr :output_directory, '/tmp'
         
+        # Encodes a Dragonfly::TempObject with the given format.
+        #
+        # An optional profile may be specified by passing a symbol in as the optional profile parameter.
+        # Profiles are defined by the configurable attribute 'encoder_profiles' - by default one profile
+        # is defined for major web formats, :html5.
         def encode(temp_object, format, profile = :html5, options = {})
+          options[:meta] = {} unless options[:meta]
           format = format.to_sym
-          original_filename = File.basename(temp_object.path, '.*')
+
+          original_basename = File.basename(temp_object.path, '.*')
           
           raise UnsupportedFormat, "Format not supported - #{format}" unless supported_format?(format)
           unless profile.is_a?(Profile)
@@ -79,15 +86,15 @@ module EnMasse
           options.merge!(profile.encoding_options)
           
           origin = ::FFMPEG::Movie.new(temp_object.path)
-          tempfile = new_tempfile(format, original_filename)
+          tempfile = new_tempfile(format, original_basename)
           transcoded_file = origin.transcode(tempfile.path, options)
           
           content = ::Dragonfly::TempObject.new(File.new(transcoded_file.path))
           meta = {
-              :name => original_filename,
+              :name => (original_basename + ".#{format}"),
               :format => format,
               :ext => File.extname(transcoded_file.path)
-          }
+          }.merge(options[:meta])
           
           [ content, meta ]
         end
