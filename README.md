@@ -8,7 +8,7 @@ See the [dragonfly documentation](http://markevans.github.com/dragonfly) for mor
 LICENSE and AUTHOR
 ==================
 
-Author:: Jamie Winsor (<jamie@enmasse.com>)
+Author:: Jamie Winsor (<jamie@vialstudios.com>)
 
 Copyright:: 2011, En Masse Entertainment, Inc
 

@@ -1,5 +1,5 @@
 #
-# Author:: Jamie Winsor (<jamie@enmasse.com>)
+# Author:: Jamie Winsor (<jamie@vialstudios.com>)
 # Copyright:: 2011, En Masse Entertainment, Inc
 # License:: Apache License, Version 2.0
 # 

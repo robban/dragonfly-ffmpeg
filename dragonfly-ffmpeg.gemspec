@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = EnMasse::Dragonfly::FFMPEG::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Jamie Winsor"]
-  s.email       = ["jamie@enmasse.com"]
+  s.email       = ["jamie@vialstudios.com"]
   s.homepage    = "https://github.com/enmasse-entertainment/dragonfly-ffmpeg"
   s.summary     = %q{A video manipulation plugin for Dragonfly }
   s.description = %q{FFMPEG libraries for processesing, encoding, analysing and generating videos with Dragonfly}
