@@ -31,7 +31,7 @@ describe EnMasse::Dragonfly::FFMPEG::Analyser do
     @analyser.ext(@video).should == '.mov'
   end
   
-  it "should return the width" do 
+  it "should return the width" do
     @analyser.v_width(@video).should == 1280
   end
   
@@ -44,7 +44,7 @@ describe EnMasse::Dragonfly::FFMPEG::Analyser do
   end
   
   it "should return the duration" do
-    @analyser.duration(@video).should == 0.6
+    (@analyser.duration(@video)*10).to_i.should == 6
   end
   
   it "should return the bit rate" do
@@ -69,6 +69,10 @@ describe EnMasse::Dragonfly::FFMPEG::Analyser do
   
   it "should return the resolution" do
     @analyser.resolution(@video).should == "1280x720"
+  end
+  
+  it "should return the bit rate" do
+    @analyser.audio_bitrate(@video).should == 89
   end
   
   it "should return the audio stream" do

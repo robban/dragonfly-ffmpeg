@@ -17,8 +17,8 @@
 #
 
 require 'rubygems'
-require 'bundler'
-Bundler.setup(:default, :test)
+#require 'bundler'
+#Bundler.setup(:default, :test)
 require 'spork'
 
 Spork.prefork do

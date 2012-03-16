@@ -64,13 +64,14 @@ describe EnMasse::Dragonfly::FFMPEG::Encoder do
     end
   end
   
-  describe "encode with an inline defined encoding profile" do
+  describe "encode with an inline defined encoding profile (:webm)" do
     let(:profile) do
       EnMasse::Dragonfly::FFMPEG::Encoder::Profile.new(:webm_720p,
         :video_codec => "libvpx",
         :resolution => "1280x720",
         :frame_rate => 29.97,
         :video_bitrate => 3072,
+        :audio_bitrate => 128,
         :audio_codec => "libvorbis",
         :audio_channels => 2,
         :audio_sample_rate => 48000,
@@ -96,8 +97,114 @@ describe EnMasse::Dragonfly::FFMPEG::Encoder do
       video.should have_bitrate(profile.encoding_options[:video_bitrate])
     end
     
+    it "should have the specified audio bitrate" do
+      video.should have_audio_bitrate(profile.encoding_options[:audio_bitrate])
+    end
+    
     it "should have the specified audio codec" do
-      video.should have_audio_codec(profile.encoding_options[:audio_codec])
+      video.should have_audio_codec("vorbis")
+    end
+    
+    it "should have the specified number of audio channels" do
+      video.should have_audio_channels(profile.encoding_options[:audio_channels])
+    end
+    
+    it "should have the specified audio sample rate" do
+      video.should have_audio_sample_rate(profile.encoding_options[:audio_sample_rate])
+    end
+  end
+  
+  
+  describe "encode with an inline defined encoding profile (ogv)" do
+    let(:profile) do
+      EnMasse::Dragonfly::FFMPEG::Encoder::Profile.new(:ogv,
+        :video_codec => "libtheora",
+        :resolution => "1280x720",
+        :frame_rate => 29.97,
+        :video_bitrate => 3072,
+        :audio_bitrate => 128,
+        :audio_codec => "libvorbis",
+        :audio_channels => 2,
+        :audio_sample_rate => 48000
+      )
+    end
+    
+    let(:video) { subject.encode(raw_video, :ogv, profile).first }
+    
+    it "should have the specified video codec" do
+      video.should have_video_codec("theora")
+    end
+    
+    it "should have the specified resolution" do
+      video.should have_resolution(profile.encoding_options[:resolution])
+    end
+    
+    it "should have the specified frame rate" do
+      video.should have_frame_rate(profile.encoding_options[:frame_rate])
+    end
+    
+    it "should have the specified bitrate" do
+      bitrate = EnMasse::Dragonfly::FFMPEG::Analyser.new.bitrate(video)
+      bitrate.should be_within(17).of(profile.encoding_options[:video_bitrate])
+    end
+    
+    it "should have the specified audio bitrate" do
+      video.should have_audio_bitrate(profile.encoding_options[:audio_bitrate])
+    end
+    
+    it "should have the specified audio codec" do
+      video.should have_audio_codec("vorbis")
+    end
+    
+    it "should have the specified number of audio channels" do
+      video.should have_audio_channels(profile.encoding_options[:audio_channels])
+    end
+    
+    it "should have the specified audio sample rate" do
+      video.should have_audio_sample_rate(profile.encoding_options[:audio_sample_rate])
+    end
+  end
+  
+  describe "encode with an inline defined encoding profile (mp4)" do
+    let(:profile) do
+      EnMasse::Dragonfly::FFMPEG::Encoder::Profile.new(:mp4,
+        :video_codec => "libx264",
+        :resolution => "1280x720",
+        :frame_rate => 29.97,
+        :video_bitrate => 3072,
+        :audio_bitrate => 128,
+        :audio_codec => "libfaac",
+        :audio_channels => 2,
+        :audio_sample_rate => 48000,
+        :video_preset => "hq"
+      )
+    end
+    
+    let(:video) { subject.encode(raw_video, :mp4, profile).first }
+    
+    it "should have the specified video codec" do
+      video.should have_video_codec("h264")
+    end
+    
+    it "should have the specified resolution" do
+      video.should have_resolution(profile.encoding_options[:resolution])
+    end
+    
+    it "should have the specified frame rate" do
+      video.should have_frame_rate(profile.encoding_options[:frame_rate])
+    end
+    
+    it "should have the specified bitrate" do
+      bitrate = EnMasse::Dragonfly::FFMPEG::Analyser.new.bitrate(video)
+      bitrate.should be_within(17).of(profile.encoding_options[:video_bitrate])
+    end
+    
+    it "should have the specified audio bitrate" do
+      video.should have_audio_bitrate(profile.encoding_options[:audio_bitrate])
+    end
+    
+    it "should have the specified audio codec" do
+      video.should have_audio_codec("aac")
     end
     
     it "should have the specified number of audio channels" do
@@ -120,5 +227,7 @@ describe EnMasse::Dragonfly::FFMPEG::Encoder do
       subject.encode(raw_video, :webm, :a_fake_profile)
     }.should raise_error(EnMasse::Dragonfly::FFMPEG::UnknownEncoderProfile)
   end
+  
+  
 
 end

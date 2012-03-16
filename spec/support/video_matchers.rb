@@ -21,6 +21,16 @@ RSpec::Matchers.define :have_video_codec do |v_codec|
     analyser = EnMasse::Dragonfly::FFMPEG::Analyser.new
     analyser.video_codec(given) == v_codec.to_s
   end
+  
+  failure_message_for_should do |given|
+    analyser = EnMasse::Dragonfly::FFMPEG::Analyser.new
+    "Expected codec #{v_codec}, but got #{analyser.video_codec(given)}"
+  end
+  
+  failure_message_for_should_not do |given|
+    analyser = EnMasse::Dragonfly::FFMPEG::Analyser.new
+    "Expected codec to not be #{v_codec}, but got #{analyser.video_codec(given)}"
+  end
 end
 
 RSpec::Matchers.define :have_resolution do |resolution|
@@ -33,35 +43,82 @@ end
 RSpec::Matchers.define :have_frame_rate do |frame_rate|
   match do |given|
     analyser = EnMasse::Dragonfly::FFMPEG::Analyser.new
-    analyser.frame_rate(given) == frame_rate.to_s
+    analyser.frame_rate(given) == frame_rate
+  end
+  
+  failure_message_for_should do |given|
+    analyser = EnMasse::Dragonfly::FFMPEG::Analyser.new
+    "Expected frame_rate #{frame_rate}, but got #{analyser.frame_rate(given)}"
+  end
+  
+  failure_message_for_should_not do |given|
+    analyser = EnMasse::Dragonfly::FFMPEG::Analyser.new
+    "Expected frame_rate to not be #{frame_rate}, but got #{analyser.frame_rate(given)}"
   end
 end
 
 RSpec::Matchers.define :have_bitrate do |bitrate|
   match do |given|
     analyser = EnMasse::Dragonfly::FFMPEG::Analyser.new
-    analyser.bitrate(given) == bitrate.to_s
+    analyser.bitrate(given) == bitrate
+  end
+  
+  failure_message_for_should do |given|
+    analyser = EnMasse::Dragonfly::FFMPEG::Analyser.new
+    "Expected bitrate #{bitrate}, but got #{analyser.bitrate(given)}"
+  end
+  
+  failure_message_for_should_not do |given|
+    analyser = EnMasse::Dragonfly::FFMPEG::Analyser.new
+    "Expected bitrate to not be #{bitrate}, but got #{analyser.bitrate(given)}"
+  end
+end
+
+RSpec::Matchers.define :have_audio_bitrate do |bitrate|
+  match do |given|
+    analyser = EnMasse::Dragonfly::FFMPEG::Analyser.new
+    analyser.audio_bitrate(given) == bitrate
+  end
+  
+  failure_message_for_should do |given|
+    analyser = EnMasse::Dragonfly::FFMPEG::Analyser.new
+    "Expected audio bitrate #{bitrate}, but got #{analyser.audio_bitrate(given)}"
+  end
+  
+  failure_message_for_should_not do |given|
+    analyser = EnMasse::Dragonfly::FFMPEG::Analyser.new
+    "Expected audio bitrate to not be #{bitrate}, but got #{analyser.audio_bitrate(given)}"
   end
 end
 
 RSpec::Matchers.define :have_audio_codec do |audio_codec|
   match do |given|
     analyser = EnMasse::Dragonfly::FFMPEG::Analyser.new
-    analyser.audio_codec(given) == audio_codec.to_s
+    analyser.audio_codec(given) == audio_codec
+  end
+  
+  failure_message_for_should do |given|
+    analyser = EnMasse::Dragonfly::FFMPEG::Analyser.new
+    "Expected audio_codec #{audio_codec}, but got #{analyser.audio_codec(given)}"
+  end
+  
+  failure_message_for_should_not do |given|
+    analyser = EnMasse::Dragonfly::FFMPEG::Analyser.new
+    "Expected audio_codec to not be #{audio_codec}, but got #{analyser.audio_codec(given)}"
   end
 end
 
 RSpec::Matchers.define :have_audio_channels do |audio_channels|
   match do |given|
     analyser = EnMasse::Dragonfly::FFMPEG::Analyser.new
-    analyser.audio_channels(given) == audio_channels.to_s
+    analyser.audio_channels(given) == audio_channels
   end
 end
 
 RSpec::Matchers.define :have_audio_sample_rate do |audio_sample_rate|
   match do |given|
     analyser = EnMasse::Dragonfly::FFMPEG::Analyser.new
-    analyser.audio_sample_rate(given) == audio_sample_rate.to_s
+    analyser.audio_sample_rate(given) == audio_sample_rate
   end
 end
 
