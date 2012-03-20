@@ -34,6 +34,7 @@ module EnMasse
               :frame_rate => 29.97,
               :video_bitrate => 3072,
               :audio_codec => "libfaac",
+              :audio_bitrate => 128,
               :audio_channels => 2,
               :audio_sample_rate => 48000,
               :video_preset => "hq"
@@ -46,6 +47,7 @@ module EnMasse
               :frame_rate => 29.97,
               :video_bitrate => 3072,
               :audio_codec => "libvorbis",
+              :audio_bitrate => 128,
               :audio_channels => 2,
               :audio_sample_rate => 48000
             )
@@ -57,6 +59,7 @@ module EnMasse
               :frame_rate => 29.97,
               :video_bitrate => 3072,
               :audio_codec => "libvorbis",
+              :audio_bitrate => 128,
               :audio_channels => 2,
               :audio_sample_rate => 48000,
               :custom => "-f webm"
@@ -88,6 +91,11 @@ module EnMasse
           origin = ::FFMPEG::Movie.new(temp_object.path)
           tempfile = new_tempfile(format, original_basename)
           transcoded_file = origin.transcode(tempfile.path, options)
+          
+          if(format.to_s == 'mp4' && `qt-faststart`)
+            `qt-faststart #{transcoded_file.path} #{transcoded_file.path}.tmp.mp4`
+            `mv #{transcoded_file.path}.tmp.mp4 #{transcoded_file.path}`
+          end
           
           content = ::Dragonfly::TempObject.new(File.new(transcoded_file.path))
           meta = {
