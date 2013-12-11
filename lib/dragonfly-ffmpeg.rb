@@ -30,4 +30,4 @@ module EnMasse
   end
 end
 
-Dragonfly::App.register_configuration(:ffmpeg) { EnMasse::Dragonfly::FFMPEG::Config }
+Dragonfly::App.register_plugin(:ffmpeg) {  EnMasse::Dragonfly::FFMPEG::Plugin.new } 
