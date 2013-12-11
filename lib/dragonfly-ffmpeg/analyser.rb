@@ -23,8 +23,6 @@ module EnMasse
     module FFMPEG
       class Analyser
         
-        include ::Dragonfly::Loggable
-        
         def ext(temp_object)
           File.extname(temp_object.path)
         end
