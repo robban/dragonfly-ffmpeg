@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
   
-  s.add_dependency 'dragonfly', '~> 0.9'
+  s.add_dependency 'dragonfly', '~> 1.0.1'
   s.add_dependency 'streamio-ffmpeg', '~> 0.8.0'
   s.add_dependency 'rake', '~> 0.9.2'
 
