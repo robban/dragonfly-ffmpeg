@@ -23,7 +23,7 @@ require 'streamio-ffmpeg'
 module EnMasse
   module Dragonfly
     module FFMPEG      
-      autoload :Config, 'dragonfly-ffmpeg/config'
+      autoload :Plugin, 'dragonfly-ffmpeg/plugin'
       autoload :Analyser, 'dragonfly-ffmpeg/analyser'
       autoload :Encoder, 'dragonfly-ffmpeg/encoder'
     end
