@@ -62,7 +62,7 @@ module EnMasse
             app.add_analyser :audio_channels do |content|
              @analyser.audio_channels(content)
             end 
-            app.add_processor :thumb, FFMPEG::Thumb.new
+            app.add_processor :v_thumb, FFMPEG::Thumb.new
         end
         
       end  
