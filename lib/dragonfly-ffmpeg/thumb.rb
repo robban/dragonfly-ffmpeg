@@ -9,7 +9,6 @@ module EnMasse
 
         def call(content, opts={})
           ext = "png"
-          logger.debug("************** ")
           tempfile = Utils.new_tempfile(ext)
           ::FFMPEG::Movie.new(content.path).screenshot(tempfile.path, seek_time: 5, resolution: '320x240')
           update(tempfile)
