@@ -9,7 +9,7 @@ module EnMasse
 
         def call(content, opts={})
           ext = "png"
-          tempfile = ::Dragonfly::Content::Utils.new_tempfile(ext)
+          tempfile = ::Dragonfly::Utils.new_tempfile(ext)
           ::FFMPEG::Movie.new(content.path).screenshot(tempfile.path, seek_time: 5, resolution: '320x240')
           update(tempfile)
           content.meta['format'] = ext
