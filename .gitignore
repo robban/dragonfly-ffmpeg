@@ -7,3 +7,4 @@ pkg/*
 .rbenv-version
 spec/spec.log
 spec/tmp/*
+.idea/*
