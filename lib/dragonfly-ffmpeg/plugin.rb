@@ -22,9 +22,9 @@ module EnMasse
       class Plugin
         
         def call(app, opts={})
-            app.add_analyser :video_properties, FFMPEG::Analyser.new
+            @analyser = FFMPEG::Analyser.new
             app.add_analyser :frame_rate do |content|
-              content.analyse(:video_properties).frame_rate(content)
+             @analyser.frame_rate(content)
             end  
         end
         
