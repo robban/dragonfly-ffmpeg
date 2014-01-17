@@ -21,19 +21,11 @@ module EnMasse
     module FFMPEG
       class Plugin
         
-         def call(app, *args)
-            app.configure do
+        def call(app, opts={})
             app.add_analyser :video_properties, FFMPEG::Analyser.new
-              encoder.register(Encoder) do |e|
-                e.output_directory = opts[:output_directory] if opts.has_key?(:output_directory)
-                e.encoder_profiles = opts[:encoder_profiles] if opts.has_key?(:encoder_profiles)
-              end
-              
-               job :html5 do |format, options|
-                options = options || {}
-                encode(format, :html5, options)
-              end
-            end
+            app.add_analyser :frame_rate do |content|
+              content.analyse(:video_properties).frame_rate
+            end  
         end
         
       end  
