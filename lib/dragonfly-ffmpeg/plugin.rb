@@ -25,7 +25,47 @@ module EnMasse
             @analyser = FFMPEG::Analyser.new
             app.add_analyser :frame_rate do |content|
              @analyser.frame_rate(content)
-            end  
+            end
+            app.add_analyser :duration do |content|
+             @analyser.duration(content)
+            end
+            app.add_analyser :bitrate do |content|
+             @analyser.bitrate(content)
+            end
+            app.add_analyser :size do |content|
+             @analyser.size(content)
+            end
+            app.add_analyser :video_stream do |content|
+             @analyser.video_stream(content)
+            end
+            app.add_analyser :video_codec do |content|
+             @analyser.video_codec(content)
+            end
+            app.add_analyser :colorspace do |content|
+             @analyser.colorspace(content)
+            end 
+            app.add_analyser :resolution do |content|
+             @analyser.resolution(content)
+            end 
+            app.add_analyser :audio_stream do |content|
+             @analyser.audio_stream(content)
+            end 
+            app.add_analyser :audio_codec do |content|
+             @analyser.audio_codec(content)
+            end 
+            app.add_analyser :audio_sample_rate do |content|
+             @analyser.audio_sample_rate(content)
+            end 
+            app.add_analyser :audio_bitrate do |content|
+             @analyser.audio_bitrate(content)
+            end 
+            app.add_analyser :audio_channels do |content|
+             @analyser.audio_channels(content)
+            end 
+            app.add_processor :thumb, FFMPEG::Thumb.new
+            
+            
+            
         end
         
       end  
