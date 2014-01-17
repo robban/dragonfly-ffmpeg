@@ -1,3 +1,5 @@
+require 'streamio-ffmpeg'
+
 module EnMasse
   module Dragonfly
     module FFMPEG
