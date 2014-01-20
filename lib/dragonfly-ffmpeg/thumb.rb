@@ -5,7 +5,7 @@ module EnMasse
     module FFMPEG
       class Thumb
 
-        def update_url(url_attributes)
+        def update_url(url_attributes, geometry, videoSec,  opts={})
           url_attributes.ext = "png"
         end
 
