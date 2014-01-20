@@ -10,6 +10,7 @@ module EnMasse
         end
 
         def call(content, geometry, videoSec, opts={})
+          args ={}
           args['geometry'] = geometry
           args['seconds'] = videoSec
           content.process!(:extract, args, opts)
