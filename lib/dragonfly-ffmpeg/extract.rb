@@ -9,7 +9,7 @@ module EnMasse
           logger.debug "FFMPEG Plugin $$$$$$$$$$$$"
           logger.debug  opts['seconds'].to_s
           logger.debug  opts['geometry'].to_s
-          ::FFMPEG::Movie.new(content.path).screenshot(tempfile.path, seek_time: opts['seconds'], resolution: opts['geometry'])
+          ::FFMPEG::Movie.new(content.path).screenshot(tempfile.path, seek_time: opts['seconds'], resolution: '100x70')
           content.update(tempfile)
           content.meta['format'] = ext
           content.ext = ext
