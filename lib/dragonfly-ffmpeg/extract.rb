@@ -4,9 +4,12 @@ module EnMasse
       class Extract
 
         def call(content, args='', opts={})
+          Rails.logger.debug("£££££ FFMPEG thumb")
+          Rails.logger.debug(opts['seconds'].to_s)
+          Rails.logger.debug(opts['geometry'] .to_s)
           ext = "png"
           tempfile = ::Dragonfly::Utils.new_tempfile(ext)
-          ::FFMPEG::Movie.new(content.path).screenshot(tempfile.path, seek_time: opts['seconds'], resolution: '100x70')
+          ::FFMPEG::Movie.new(content.path).screenshot(tempfile.path, seek_time: opts['seconds'], resolution: opts['geometry'] )
           content.update(tempfile)
           content.meta['format'] = ext
           content.ext = ext
