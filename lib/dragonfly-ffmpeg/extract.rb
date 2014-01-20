@@ -6,9 +6,9 @@ module EnMasse
         def call(content, args='', opts={})
           ext = "png"
           tempfile = ::Dragonfly::Utils.new_tempfile(ext)
-          puts "FFMPEG Plugin $$$$$$$$$$$$"
-          puts  opts['seconds'].to_s
-          puts  opts['geometry'].to_s
+          logger.debug "FFMPEG Plugin $$$$$$$$$$$$"
+          logger.debug  opts['seconds'].to_s
+          logger.debug  opts['geometry'].to_s
           ::FFMPEG::Movie.new(content.path).screenshot(tempfile.path, seek_time: opts['seconds'], resolution: opts['geometry'])
           content.update(tempfile)
           content.meta['format'] = ext
