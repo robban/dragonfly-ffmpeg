@@ -9,7 +9,9 @@ module EnMasse
           url_attributes.ext = "png"
         end
 
-        def call(content, opts={})
+        def call(content, geometry, videoSec, opts={})
+          opts['geometry'] = geometry
+          opts['seconds'] = videoSec
           content.process!(:extract, opts)
         end
 
