@@ -9,7 +9,7 @@ module EnMasse
           Rails.logger.debug(args['geometry'] .to_s)
           ext = "png"
           tempfile = ::Dragonfly::Utils.new_tempfile(ext)
-          ::FFMPEG::Movie.new(content.path).screenshot(tempfile.path, seek_time: args['seconds'], resolution: args['geometry'], opts)
+          ::FFMPEG::Movie.new(content.path).screenshot(tempfile.path, seek_time: args['seconds'], resolution: args['geometry'])
           content.update(tempfile)
           content.meta['format'] = ext
           content.ext = ext
