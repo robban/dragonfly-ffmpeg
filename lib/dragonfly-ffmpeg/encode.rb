@@ -8,7 +8,8 @@ module EnMasse
         end
 
         def call(content, format, args="")
-          content.process!(:convert, args, 'format' => format)
+          encoder = Encoder.new
+          encoder.encode(content, format)
         end
 
       end
