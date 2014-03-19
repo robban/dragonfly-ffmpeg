@@ -60,11 +60,11 @@ module EnMasse
           inspect_movie(:resolution, temp_object)
         end
         
-        def v_width(temp_object)
+        def width(temp_object)
           inspect_movie(:width, temp_object)
         end
         
-        def v_height(temp_object)
+        def height(temp_object)
           inspect_movie(:height, temp_object)
         end
         
