@@ -72,7 +72,7 @@ module EnMasse
              @analyser.height(content)
             end
            
-            #app.add_processor :encode,  FFMPEG::Encode.new
+            app.add_processor :encode,  FFMPEG::Encode.new
             app.add_processor :extract, FFMPEG::Extract.new
             app.add_processor :v_thumb, FFMPEG::Thumb.new
 
