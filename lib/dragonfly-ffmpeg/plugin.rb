@@ -69,7 +69,7 @@ module EnMasse
             end
             
             app.add_analyser :height do |content|
-             @analyser.width(content)
+             @analyser.height(content)
             end
            
 
