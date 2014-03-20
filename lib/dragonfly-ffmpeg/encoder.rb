@@ -116,11 +116,11 @@ module EnMasse
           
           content = ::Dragonfly::TempObject.new(File.new(transcoded_file.path))
           meta = {
-              :name => (original_basename + ".#{format}"),
+              :name => (transcoded_file.name + ".#{format}"),
               :format => format,
               :ext => File.extname(transcoded_file.path)
           }.merge(options[:meta])
-          Rails.logger.debug("Finished the encoding..." + content)
+          Rails.logger.debug("Finished the encoding..." + meta)
           [ content, meta ]
         end
                 
