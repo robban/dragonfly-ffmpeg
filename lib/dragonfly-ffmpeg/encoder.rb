@@ -86,6 +86,7 @@ module EnMasse
            Rails.logger.debug(content.inspect)
            temp_obj,meta = encode(content.temp_object, format)
            content.update(temp_obj)
+           Rails.logger.debug(content.inspect)
            content.meta = meta
            Rails.logger.debug(content.meta)
         end
