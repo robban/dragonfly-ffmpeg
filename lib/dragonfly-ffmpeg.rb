@@ -25,9 +25,8 @@ module EnMasse
     module FFMPEG      
       autoload :Plugin, 'dragonfly-ffmpeg/plugin'
       autoload :Analyser, 'dragonfly-ffmpeg/analyser'
-      autoload :Encoder, 'dragonfly-ffmpeg/encoder'
+      autoload :Encode, 'dragonfly-ffmpeg/encoder'
       autoload :Thumb, 'dragonfly-ffmpeg/thumb'
-      autoload :Encode, 'dragonfly-ffmpeg/encode'
       autoload :Extract, 'dragonfly-ffmpeg/extract'
     end
   end
