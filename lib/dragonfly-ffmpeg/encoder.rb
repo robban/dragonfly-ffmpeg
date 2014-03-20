@@ -88,6 +88,7 @@ module EnMasse
            content.update(temp_obj)
            Rails.logger.debug(content.inspect)
            content.meta = meta
+           content.ext = meta[:ext]
            Rails.logger.debug(content.meta)
         end
         
