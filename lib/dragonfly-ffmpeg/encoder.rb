@@ -77,7 +77,7 @@ module EnMasse
         def encode(temp_object, format, profile = :html5, options = {})
           options[:meta] = {} unless options[:meta]
           format = format.to_sym
-
+          
           original_basename = File.basename(temp_object.path, '.*')
           
           raise UnsupportedFormat, "Format not supported - #{format}" unless supported_format?(format)
@@ -103,7 +103,7 @@ module EnMasse
               :format => format,
               :ext => File.extname(transcoded_file.path)
           }.merge(options[:meta])
-          
+          logger.log("Finished the encoding..." + File.extname(transcoded_file.path))
           [ content, meta ]
         end
                 
