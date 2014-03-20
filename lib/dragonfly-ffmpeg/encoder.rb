@@ -89,7 +89,6 @@ module EnMasse
            Rails.logger.debug(content.inspect)
            content.meta = meta
            content.ext = meta[:format]
-           content.format = meta[:format]
            Rails.logger.debug(content.meta)
         end
         
