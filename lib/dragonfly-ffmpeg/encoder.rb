@@ -116,7 +116,7 @@ module EnMasse
           
           content = ::Dragonfly::TempObject.new(File.new(transcoded_file.path))
           meta = {
-              :name => (transcoded_file.name + ".#{format}"),
+              :name => (original_basename + ".#{format}"),
               :format => format,
               :ext => File.extname(transcoded_file.path)
           }.merge(options[:meta])
