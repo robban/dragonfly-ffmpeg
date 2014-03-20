@@ -83,7 +83,10 @@ module EnMasse
         end
 
         def call(content, format, args="")
-           encode(content, format)
+           temp_obj,meta = encode(content.temp_object, format)
+           content.update(temp_obj)
+           content.meta = meta
+           content.ext = ext
         end
         
         # Encodes a Dragonfly::TempObject with the given format.
