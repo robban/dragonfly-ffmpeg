@@ -83,10 +83,11 @@ module EnMasse
         end
 
         def call(content, format, args="")
+           Rails.logger.debug(content.inspect)
            temp_obj,meta = encode(content.temp_object, format)
            content.update(temp_obj)
            content.meta = meta
-           Rails.logger.debug(meta.inspect)
+           Rails.logger.debug(content.meta)
         end
         
         # Encodes a Dragonfly::TempObject with the given format.
