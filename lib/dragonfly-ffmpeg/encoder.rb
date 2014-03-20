@@ -27,8 +27,10 @@ module EnMasse
         
         #include ::Dragonfly::Configurable
       
-        
-        attr_accessor_with_default :encoder_profiles, {
+        attr_writer :encoder_profiles
+
+        def encoder_profiles
+          @encoder_profiles || {
           :mp4 => [
             Profile.new(:html5,
               :video_codec => "libx264",
@@ -68,8 +70,13 @@ module EnMasse
             )
           ]
         }
+        end
         
-        attr_accessor_with_default :output_directory, '/tmp'
+        attr_writer :output_directory
+
+        def output_directory
+          @output_directory || '/tmp'
+        end
         
         def update_url(attrs, format, args="")
           attrs.ext = format.to_s
