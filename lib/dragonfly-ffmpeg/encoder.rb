@@ -17,20 +17,18 @@
 #
 
 require 'pathname'
-require 'configurable'
 
 module EnMasse
   module Dragonfly
     module FFMPEG
       class Encoder
-        extend Configurable
         
         autoload :Profile, 'dragonfly-ffmpeg/encoder/profile'
         
-        include ::Dragonfly::Configurable
+        #include ::Dragonfly::Configurable
       
         
-        configurable_attr :encoder_profiles, {
+        attr_reader :encoder_profiles, {
           :mp4 => [
             Profile.new(:html5,
               :video_codec => "libx264",
@@ -71,7 +69,7 @@ module EnMasse
           ]
         }
         
-        configurable_attr :output_directory, '/tmp'
+        attr_reader :output_directory, '/tmp'
         
         def update_url(attrs, format, args="")
           attrs.ext = format.to_s
