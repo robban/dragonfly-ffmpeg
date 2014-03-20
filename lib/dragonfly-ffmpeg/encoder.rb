@@ -22,11 +22,12 @@ module EnMasse
   module Dragonfly
     module FFMPEG
       class Encoder
+        extend Configurable
+        
         autoload :Profile, 'dragonfly-ffmpeg/encoder/profile'
         
         include ::Dragonfly::Configurable
-        
-        extend Configurable
+      
         
         configurable_attr :encoder_profiles, {
           :mp4 => [
