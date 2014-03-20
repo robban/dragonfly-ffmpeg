@@ -17,6 +17,7 @@
 #
 
 require 'pathname'
+require 'configurable'
 
 module EnMasse
   module Dragonfly
