@@ -120,7 +120,7 @@ module EnMasse
               :format => format,
               :ext => File.extname(transcoded_file.path)
           }.merge(options[:meta])
-          Rails.logger.debug("Finished the encoding..." + meta)
+          Rails.logger.debug("Finished the encoding..." + meta.inspect)
           [ content, meta ]
         end
                 
