@@ -69,6 +69,14 @@ module EnMasse
         
         configurable_attr :output_directory, '/tmp'
         
+        def update_url(attrs, format, args="")
+          attrs.ext = format.to_s
+        end
+
+        def call(content, format, args="")
+           encode(content, format)
+        end
+        
         # Encodes a Dragonfly::TempObject with the given format.
         #
         # An optional profile may be specified by passing a symbol in as the optional profile parameter.
