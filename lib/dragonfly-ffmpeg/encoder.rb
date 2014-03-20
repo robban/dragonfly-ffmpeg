@@ -17,7 +17,6 @@
 #
 
 require 'pathname'
-require 'configurable'
 
 module EnMasse
   module Dragonfly
@@ -26,6 +25,8 @@ module EnMasse
         autoload :Profile, 'dragonfly-ffmpeg/encoder/profile'
         
         include ::Dragonfly::Configurable
+        
+        extend Configurable
         
         configurable_attr :encoder_profiles, {
           :mp4 => [
