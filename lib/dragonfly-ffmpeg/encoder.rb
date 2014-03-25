@@ -47,9 +47,9 @@ module EnMasse
           :ogv => [
             Profile.new(:html5,
               :video_codec => "libtheora",
-              :resolution => "1024x768",
-              :frame_rate => 29.97,
-              :video_bitrate => 3072,
+              :resolution => "640x480",
+              :frame_rate => 25,
+              :video_bitrate => 1500,
               :audio_codec => "libvorbis",
               :audio_bitrate => 128,
               :audio_channels => 2,
