@@ -34,7 +34,7 @@ module EnMasse
           :mp4 => [
             Profile.new(:html5,
               :video_codec => "libx264",
-              :resolution => "640x480",
+              :resolution => "1024x768",
               :frame_rate => 25,
               :video_bitrate => 1600,
               :x264_vprofile => "baseline",
