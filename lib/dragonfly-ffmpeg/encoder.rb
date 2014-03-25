@@ -41,7 +41,7 @@ module EnMasse
               :audio_bitrate => 128,
               :audio_channels => 2,
               :audio_sample_rate => 48000,
-              :video_preset => "baseline"
+              :video_preset => "x264"
             )
           ],
           :ogv => [
