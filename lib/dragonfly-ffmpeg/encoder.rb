@@ -37,6 +37,7 @@ module EnMasse
               :resolution => "640x480",
               :frame_rate => 25,
               :video_bitrate => 1600,
+              :x264_vprofile => "baseline",
               :audio_codec => "libfaac",
               :audio_bitrate => 128,
               :audio_channels => 2,
