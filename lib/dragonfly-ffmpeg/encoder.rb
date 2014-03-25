@@ -34,7 +34,7 @@ module EnMasse
           :mp4 => [
             Profile.new(:html5,
               :video_codec => "libx264",
-              :resolution => "1280x720",
+              :resolution => "1024x768",
               :frame_rate => 29.97,
               :video_bitrate => 3072,
               :audio_codec => "libfaac",
@@ -47,7 +47,7 @@ module EnMasse
           :ogv => [
             Profile.new(:html5,
               :video_codec => "libtheora",
-              :resolution => "1280x720",
+              :resolution => "1024x768",
               :frame_rate => 29.97,
               :video_bitrate => 3072,
               :audio_codec => "libvorbis",
