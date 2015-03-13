@@ -69,6 +69,20 @@ module EnMasse
               :audio_sample_rate => 48000,
               :custom => "-f webm"
             )
+          ],
+          :mp3 => [
+              Profile.new(:html5,
+                :audio_codec => "libmp3lame",
+                :audio_channels => 2,
+                :custom => "-qscale:a 5"
+              )
+          ],
+          :ogg => [
+              Profile.new(:html5,
+                :audio_codec => "libvorbis",
+                :audio_channels => 2,
+                :custom => "-qscale:a 5"
+              )
           ]
         }
         end
