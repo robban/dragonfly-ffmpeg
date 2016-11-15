@@ -5,6 +5,24 @@ Dragonly-FFMPEG is a plugin for Dragonfly that analyzes video files using the st
 
 See the [dragonfly documentation](http://markevans.github.com/dragonfly) for more info, as the equivalent ImageMagick methods have the same API.
 
+How to install
+=================
+1. Add it to your Gemfile
+  gem 'dragonfly-ffmpeg', git: "git://github.com/robban/dragonfly-ffmpeg.git"
+
+2. In your dragonfly initializer, inside the configure block, add the line:
+     plugin :ffmpeg
+
+3. Add a dragonfly model in the same way you do usually in dragonfly. The difference is now the thumb method returns a
+  video instead of an image.
+
+
+  To get a poster image you can use the v_thumb method (it takes an extra parameter, that is
+  the time in seconds from the start of the video where the thumbnail will be taken from).
+
+  To encode a video in a specific format use the v_encode method. It has some predefined profiles that you can choose from
+  Don't know if it is possible to define them on the fly(for example the resolution)..
+
 LICENSE and AUTHOR
 ==================
 
