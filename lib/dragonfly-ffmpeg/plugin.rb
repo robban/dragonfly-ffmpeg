@@ -72,8 +72,11 @@ module EnMasse
              @analyser.height(content)
             end
            
-            app.add_processor :encode,  FFMPEG::Encoder.new
+
+            # Cannot be named encode due to collision with image-magick plugin
+            app.add_processor :v_encode,  FFMPEG::Encoder.new
             app.add_processor :extract, FFMPEG::Extract.new
+            # Cannot be named thumb due to collision with image-magick plugin
             app.add_processor :v_thumb, FFMPEG::Thumb.new
 
         end
